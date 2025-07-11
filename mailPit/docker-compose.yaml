@@ -1,0 +1,16 @@
+# Define a custom bridge network for communication between containers
+networks:
+  network:
+    driver: bridge
+
+services:
+  # Mailpit service for email testing
+  mailpit:
+    container_name: mailPit
+    tty: true
+    image: axllent/mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+    networks:
+      - network

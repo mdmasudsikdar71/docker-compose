@@ -1,0 +1,17 @@
+# Define a custom bridge network for communication between containers
+networks:
+  network:
+    driver: bridge
+
+services:
+  # Node service
+  node:
+    container_name: node
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ./:/var/www/html:cached
+    networks:
+      - network

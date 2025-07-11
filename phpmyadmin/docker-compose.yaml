@@ -1,0 +1,22 @@
+# Define a custom bridge network for communication between containers
+networks:
+  network:
+    driver: bridge
+
+services:
+  # phpMyAdmin for database management
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: user
+      PMA_PASSWORD: pass
+    ports:
+      - "8030:80"
+    depends_on:
+      - mysql
+    networks:
+      - network

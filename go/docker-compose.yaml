@@ -1,0 +1,21 @@
+# Define a custom bridge network for communication between containers
+networks:
+  network:
+    driver: bridge
+
+services:
+  # GO service for processing golang code
+  go:
+    container_name: go
+    tty: true
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/app:cached
+    working_dir: /app
+    networks:
+      - network

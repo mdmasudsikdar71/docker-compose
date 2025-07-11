@@ -4,9 +4,6 @@ FROM node:22-alpine
 # Set maintainer info
 LABEL maintainer="MD Masud Sikdar <masudsikdar85@gmail.com>"
 
-# Enable Corepack & install Yarn
-RUN corepack enable && corepack prepare yarn@stable --activate
-
 # Create and set working directory
 WORKDIR /var/www/html
 

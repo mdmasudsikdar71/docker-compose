@@ -1,0 +1,21 @@
+# Define a custom bridge network for communication between containers
+networks:
+  network:
+    driver: bridge
+
+services:
+  # PHP-FPM service for processing PHP code
+  php:
+    container_name: php
+    tty: true
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/var/www/html:cached
+      - ./php.ini:/usr/local/etc/php/conf.d/custom.ini
+    networks:
+      - network

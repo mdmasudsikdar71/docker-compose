@@ -1,3 +1,5 @@
-.docker/database
+.docker/mysql/database
+.docker/postgres/pgdata
+.docker/redis/data
 .idea
 .DS_Store

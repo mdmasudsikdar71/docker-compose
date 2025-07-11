@@ -1,0 +1,21 @@
+# Define a custom bridge network for communication between containers
+networks:
+  network:
+    driver: bridge
+
+services:
+  # Nginx service for serving web content
+  nginx:
+    container_name: nginx
+    tty: true
+    image: nginx
+    restart: unless-stopped
+    depends_on:
+      - php
+    volumes:
+      - ./:/var/www/html:cached
+      - ./:/etc/nginx/conf.d
+    ports:
+      - "8000:80"
+    networks:
+      - network

@@ -1,0 +1,17 @@
+# Define a custom bridge network for communication between containers
+networks:
+  network:
+    driver: bridge
+
+services:
+  # adminer for database management
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - "8030:8080"
+    depends_on:
+      - mysql
+    networks:
+      - network

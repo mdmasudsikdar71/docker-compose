@@ -1,0 +1,24 @@
+# Define a custom bridge network for communication between containers
+networks:
+  network:
+    driver: bridge
+
+services:
+  # Python service for processing python code
+  python:
+    container_name: python
+    tty: true
+    build:
+      context: ./
+      dockerfile: Dockerfile.python
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/app:cached
+    working_dir: /app
+    ports:
+      - "8000:8000"
+#    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload  # Hot reload for FastAPI
+    networks:
+      - network
