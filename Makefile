@@ -24,19 +24,6 @@ else
     IS_WINDOWS = 0
 endif
 
-# ------------------------------------------------------
-# Helper function to get container path
-# Usage: $(call CONTAINER_PATH,container_name,plugins|themes)
-# Returns the correct path depending on container type
-# ------------------------------------------------------
-define CONTAINER_PATH
-if [ "$$1" = "node" ]; then \
-    echo "/var/www/html/dashboard/wp-content/$(2)"; \
-else \
-    echo "/var/www/html/wp-content/$(2)"; \
-fi
-endef
-
 # ======================================================
 # HELP TARGET
 # ======================================================
